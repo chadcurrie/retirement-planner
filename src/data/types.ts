@@ -15,7 +15,7 @@ export interface Profile {
 export interface Phase {
   id: string
   name: string              // e.g. "Tech job", "Startup years", "Retirement"
-  startAge: number
+  startAge: number | null   // null = "starts now" — resolves to currentAge at runtime
   endAge: number | null     // null = "until end of plan" — resolves to planToAge at runtime
   annualIncome: number      // today's dollars
   annualSpending: number    // today's dollars
@@ -29,7 +29,7 @@ export interface Phase {
 export interface PlanEvent {
   id: string
   name: string              // e.g. "House sale", "Social Security"
-  age: number               // when it fires
+  age: number | null        // when it fires — null = "now" (currentAge at runtime)
   amount: number            // today's dollars — positive=windfall, negative=expense
   recurring?: {
     annualAmount: number    // today's dollars per year after initial event

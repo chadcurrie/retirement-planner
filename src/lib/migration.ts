@@ -26,8 +26,8 @@ export function migrate(raw: unknown): RetirementPlan {
 
   switch (data.version) {
     case 1: {
-      const plan = data as RetirementPlan
-      const profile = plan.profile as Record<string, unknown>
+      const plan = data as unknown as RetirementPlan
+      const profile = plan.profile as unknown as Record<string, unknown>
       // Restore planToAge if it was stripped by an earlier migration — derive from phase ends.
       if (profile.planToAge === undefined) {
         const maxAge = plan.phases.reduce((m, p) => {

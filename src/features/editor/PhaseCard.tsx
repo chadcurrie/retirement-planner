@@ -1,5 +1,6 @@
 import { usePlanStore } from '@/store/planStore'
 import type { Phase } from '@/data/types'
+import { ageFromBirthYear } from '@/lib/simulation'
 import { Field } from './Field'
 import { TimelineBar } from './TimelineBar'
 import { PHASE_COLORS } from '@/lib/tokens'
@@ -12,7 +13,9 @@ interface PhaseCardProps {
 export function PhaseCard({ phase, index }: PhaseCardProps) {
   const updatePhase = usePlanStore((s) => s.updatePhase)
   const removePhase = usePlanStore((s) => s.removePhase)
+  const birthYear = usePlanStore((s) => s.plan.profile.birthYear)
   const planToAge = usePlanStore((s) => s.plan.profile.planToAge)
+  const currentAge = ageFromBirthYear(birthYear)
   const color = PHASE_COLORS[index % PHASE_COLORS.length]
 
   const safePoolTarget = phase.annualSpending * phase.safeYears
@@ -39,13 +42,16 @@ export function PhaseCard({ phase, index }: PhaseCardProps) {
       </div>
 
       {/* Timeline bar */}
-      <TimelineBar startAge={phase.startAge} endAge={phase.endAge ?? planToAge} color={color} />
+      <TimelineBar startAge={phase.startAge ?? currentAge} endAge={phase.endAge ?? planToAge} color={color} />
 
       {/* Row 1: timing + cash flows */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
         <Field
           label="Start age"
-          value={phase.startAge}
+          value={phase.startAge ?? currentAge}
+          linked={phase.startAge === null}
+          linkLabel="Now"
+          onLinkToggle={() => updatePhase(phase.id, { startAge: phase.startAge === null ? currentAge : null })}
           onChangeValue={(v) => updatePhase(phase.id, { startAge: v })}
         />
         <Field
@@ -76,7 +82,7 @@ export function PhaseCard({ phase, index }: PhaseCardProps) {
       </div>
 
       {/* Row 2: portfolio allocation */}
-      <div className="grid grid-cols-3 gap-2.5">
+      <div className="grid grid-cols-3 gap-5">
         <Field
           label="Growth rate"
           step={0.1}

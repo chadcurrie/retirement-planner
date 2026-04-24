@@ -10,9 +10,10 @@ interface FieldProps {
   placeholder?: string
   onChangeValue: (value: number) => void
   className?: string
-  // "Link to plan end" — when provided, shows a toggle badge in the label row
+  // Link toggle — when provided, shows a [Plan end | Custom] or [Now | Custom] switch
   linked?: boolean
   onLinkToggle?: () => void
+  linkLabel?: string        // label for the linked state — defaults to "Plan end"
 }
 
 function formatBlurred(value: number, step?: number, plain?: boolean): string {
@@ -27,7 +28,7 @@ function formatBlurred(value: number, step?: number, plain?: boolean): string {
 
 export function Field({
   label, prefix, suffix, value, step, plain, placeholder,
-  onChangeValue, className = '', linked, onLinkToggle,
+  onChangeValue, className = '', linked, onLinkToggle, linkLabel = 'Plan end',
 }: FieldProps) {
   const [focused, setFocused] = useState(false)
   const [draft, setDraft] = useState('')
@@ -55,7 +56,7 @@ export function Field({
         <span className="text-xs text-ink-2 truncate">{label}</span>
         {onLinkToggle && (
           <div className="flex items-center gap-1.5 shrink-0">
-            <span className="text-[10px] text-ink-2">Plan end</span>
+            <span className="text-[10px] text-ink-2">{linkLabel}</span>
             <button
               type="button"
               role="switch"

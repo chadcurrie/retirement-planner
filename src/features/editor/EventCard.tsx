@@ -1,5 +1,6 @@
 import { usePlanStore } from '@/store/planStore'
 import type { PlanEvent } from '@/data/types'
+import { ageFromBirthYear } from '@/lib/simulation'
 import { Field } from './Field'
 import { TimelineDot } from './TimelineBar'
 import { chartColors } from '@/lib/tokens'
@@ -11,7 +12,9 @@ interface EventCardProps {
 export function EventCard({ event }: EventCardProps) {
   const updateEvent = usePlanStore((s) => s.updateEvent)
   const removeEvent = usePlanStore((s) => s.removeEvent)
+  const birthYear = usePlanStore((s) => s.plan.profile.birthYear)
   const planToAge = usePlanStore((s) => s.plan.profile.planToAge)
+  const currentAge = ageFromBirthYear(birthYear)
 
   const isYearly = !!event.recurring
   // Single display amount — whichever field is active in the current mode
@@ -64,13 +67,16 @@ export function EventCard({ event }: EventCardProps) {
       </div>
 
       {/* Timeline */}
-      <TimelineDot age={event.age} color={dotColor} />
+      <TimelineDot age={event.age ?? currentAge} color={dotColor} />
 
       {/* All fields in one row */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
         <Field
           label="At age"
-          value={event.age}
+          value={event.age ?? currentAge}
+          linked={event.age === null}
+          linkLabel="Now"
+          onLinkToggle={() => updateEvent(event.id, { age: event.age === null ? currentAge : null })}
           onChangeValue={(v) => updateEvent(event.id, { age: v })}
         />
         <Field

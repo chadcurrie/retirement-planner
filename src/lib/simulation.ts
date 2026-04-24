@@ -27,7 +27,7 @@ function computeEffectiveRealReturn(phase: Phase, balance: number, inflationRate
 }
 
 function findActivePhase(phases: Phase[], age: number): Phase | undefined {
-  return phases.find(p => age >= p.startAge && age <= p.endAge)
+  return phases.find(p => age >= (p.startAge ?? 0) && age <= (p.endAge ?? Infinity))
 }
 
 function getEventContribution(events: PlanEvent[], age: number): number {
@@ -35,7 +35,7 @@ function getEventContribution(events: PlanEvent[], age: number): number {
     if (event.age === age) {
       total += event.amount
     }
-    if (event.recurring && age >= event.age && age <= event.recurring.untilAge) {
+    if (event.recurring && age >= (event.age ?? age) && age <= (event.recurring.untilAge ?? Infinity)) {
       total += event.recurring.annualAmount
     }
     return total
@@ -50,10 +50,15 @@ export function simulate(
   const { birthYear, currentNestEgg, planToAge, inflationRate } = profile
   const currentAge = ageFromBirthYear(birthYear)
 
-  // Resolve null endAge / untilAge → planToAge so the rest of the engine works with plain numbers
-  const resolvedPhases = phases.map(p => ({ ...p, endAge: p.endAge ?? planToAge }))
+  // Resolve null sentinels → concrete ages so the rest of the engine works with plain numbers
+  const resolvedPhases = phases.map(p => ({
+    ...p,
+    startAge: p.startAge ?? currentAge,
+    endAge: p.endAge ?? planToAge,
+  }))
   const resolvedEvents = events.map(e => ({
     ...e,
+    age: e.age ?? currentAge,
     recurring: e.recurring ? { ...e.recurring, untilAge: e.recurring.untilAge ?? planToAge } : undefined,
   }))
   const results: SimulationDataPoint[] = []

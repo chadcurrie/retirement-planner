@@ -15,7 +15,7 @@ export const DEFAULT_PLAN: RetirementPlan = {
     {
       id: 'phase-work',
       name: 'Working years',
-      startAge: 45,
+      startAge: null,         // linked to Now
       endAge: 65,
       annualIncome: 150_000,
       annualSpending: 90_000,
@@ -27,13 +27,12 @@ export const DEFAULT_PLAN: RetirementPlan = {
       id: 'phase-retire',
       name: 'Retirement',
       startAge: 65,
-      endAge: 95,
+      endAge: null,           // linked to planToAge
       annualIncome: 0,
       annualSpending: 80_000,
       nominalReturnRate: 0.05,
       safeReturnRate: 0.02,
       safeYears: 2,
-      endAge: null,           // linked to planToAge
     },
   ],
   events: [

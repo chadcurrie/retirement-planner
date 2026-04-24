@@ -12,7 +12,7 @@ export function ProfileEditor() {
     <section>
       <h2 className="section-heading mb-3">Profile</h2>
       <div className="bg-surface rounded-xl border border-border p-4">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
           <div>
             <Field
               label="Birth year"
