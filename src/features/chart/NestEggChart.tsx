@@ -19,16 +19,19 @@ import type { SimulationDataPoint, SimulationResult } from '@/data/types'
 
 const METER_RANGE = 20  // ±years mapped to 0–100% of track
 
-function runwayLabel(years: number, depletionAge: number | null, planToAge: number) {
+function runwayLabel(years: number, depletionAge: number | null, planToAge: number, dark: boolean) {
+  const successHex = dark ? '#00e676' : '#009945'
+  const warnHex    = dark ? '#ffd600' : '#d4900a'
+  const dangerHex  = dark ? '#ff1744' : '#e0003c'
   if (depletionAge !== null) {
     const short = planToAge - depletionAge
-    return { text: `Runs dry at ${depletionAge} · ${short} yrs short`, hex: '#e11d48' }
+    return { text: `Runs dry at ${depletionAge} · ${short} yrs short`, hex: dangerHex }
   }
   const yrs = Math.round(years)
-  if (yrs <= 1)  return { text: 'Sweet spot',         hex: '#059669' }
-  if (yrs <= 5)  return { text: `${yrs} yr cushion`,  hex: '#059669' }
-  if (yrs <= 15) return { text: `+${yrs} yr surplus`, hex: '#f97316' }
-  return           { text: 'Healthy legacy',           hex: '#f97316' }
+  if (yrs <= 1)  return { text: 'Sweet spot',         hex: successHex }
+  if (yrs <= 5)  return { text: `${yrs} yr cushion`,  hex: successHex }
+  if (yrs <= 15) return { text: `+${yrs} yr surplus`, hex: warnHex }
+  return           { text: 'Healthy legacy',           hex: warnHex }
 }
 
 interface MeterProps {
@@ -48,11 +51,11 @@ function PlanHealthMeter({ result, planToAge, lastPhaseSpending, dotColor, dark 
     : endBalance / Math.max(1, lastPhaseSpending)
 
   const position = Math.max(0, Math.min(1, (runwayYears + METER_RANGE) / (2 * METER_RANGE)))
-  const { text, hex } = runwayLabel(runwayYears, depletionAge, planToAge)
+  const { text, hex } = runwayLabel(runwayYears, depletionAge, planToAge, dark)
 
   const gradient = dark
-    ? 'linear-gradient(to right, #1e3a8a, #030712 50%, #7c2d12)'
-    : 'linear-gradient(to right, #bfdbfe, #ffffff 50%, #fed7aa)'
+    ? 'linear-gradient(to right, #003d4d, #0a0a0a 50%, #3d3300)'
+    : 'linear-gradient(to right, #00d4ff, #e8e8e8 50%, #ffee00)'
 
   return (
     <div className="flex items-center gap-2.5 shrink-0">
@@ -207,7 +210,7 @@ export function NestEggChart() {
             <button
               onClick={() => showNominal && toggleNominal()}
               className={`px-2.5 py-1 transition-colors ${
-                !showNominal ? 'bg-brand text-white' : 'text-ink-2 hover:text-ink-2 hover:bg-subtle'
+                !showNominal ? 'bg-ink text-surface' : 'text-ink-2 hover:text-ink-2 hover:bg-subtle'
               }`}
             >
               Today's $
@@ -215,7 +218,7 @@ export function NestEggChart() {
             <button
               onClick={() => !showNominal && toggleNominal()}
               className={`px-2.5 py-1 transition-colors border-l border-border ${
-                showNominal ? 'bg-brand text-white' : 'text-ink-2 hover:text-ink-2 hover:bg-subtle'
+                showNominal ? 'bg-ink text-surface' : 'text-ink-2 hover:text-ink-2 hover:bg-subtle'
               }`}
             >
               Future $
@@ -236,7 +239,7 @@ export function NestEggChart() {
               </linearGradient>
             </defs>
 
-            <CartesianGrid strokeDasharray="3 3" stroke={c.grid} vertical={false} />
+            <CartesianGrid strokeDasharray="2 5" stroke={c.grid} strokeWidth={1} vertical={false} />
 
             <XAxis
               dataKey="age"

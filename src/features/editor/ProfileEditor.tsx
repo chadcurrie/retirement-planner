@@ -11,7 +11,7 @@ export function ProfileEditor() {
   return (
     <section>
       <h2 className="section-heading mb-3">Profile</h2>
-      <div className="bg-surface rounded-xl border border-border p-4">
+      <div className="bg-surface rounded-2xl p-4">
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-5">
           <div>
             <Field

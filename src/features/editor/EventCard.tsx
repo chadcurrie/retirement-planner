@@ -46,7 +46,7 @@ export function EventCard({ event }: EventCardProps) {
   }
 
   return (
-    <div className="bg-surface rounded-xl border border-border p-4 space-y-3">
+    <div className="bg-surface rounded-2xl p-4 space-y-3">
       {/* Name + delete */}
       <div className="flex items-center gap-2">
         <div className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: dotColor }} />
@@ -94,7 +94,7 @@ export function EventCard({ event }: EventCardProps) {
             <button
               onClick={setOneTime}
               className={`flex-1 transition-colors ${
-                !isYearly ? 'bg-brand text-white' : 'text-ink-2 hover:text-ink hover:bg-subtle'
+                !isYearly ? 'bg-ink text-surface' : 'text-ink-2 hover:text-ink hover:bg-subtle'
               }`}
             >
               One-time
@@ -102,7 +102,7 @@ export function EventCard({ event }: EventCardProps) {
             <button
               onClick={setYearly}
               className={`flex-1 transition-colors border-l border-border ${
-                isYearly ? 'bg-brand text-white' : 'text-ink-2 hover:text-ink hover:bg-subtle'
+                isYearly ? 'bg-ink text-surface' : 'text-ink-2 hover:text-ink hover:bg-subtle'
               }`}
             >
               Yearly

@@ -63,7 +63,7 @@ export function Field({
               aria-checked={linked}
               onClick={onLinkToggle}
               className={`relative w-7 h-4 rounded-full transition-colors ${
-                linked ? 'bg-brand' : 'bg-border'
+                linked ? 'bg-ink' : 'bg-ink-3'
               }`}
             >
               <span className={`absolute top-0.5 left-0.5 w-3 h-3 rounded-full bg-white shadow-sm transition-transform ${
@@ -76,7 +76,7 @@ export function Field({
       <div className={`flex items-center gap-1 px-2 py-1.5 bg-subtle rounded-lg border transition-colors ${
         linked
           ? 'border-border opacity-50'
-          : 'border-border focus-within:border-brand focus-within:ring-1 focus-within:ring-brand'
+          : 'border-border focus-within:border-ink focus-within:ring-2 focus-within:ring-ink'
       }`}>
         {prefix && <span className="text-ink-2 text-xs shrink-0">{prefix}</span>}
         <input

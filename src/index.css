@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 /*
@@ -60,59 +61,60 @@
 
 /* ── Light mode ──────────────────────────────────────────────────────────── */
 :root {
-  /* Surfaces */
-  --canvas:         #f9fafb;   /* page background   — gray-50  */
-  --surface:        #ffffff;   /* card/panel        — white    */
-  --subtle:         #f3f4f6;   /* input bg, hovers  — gray-100 */
+  /* Surfaces — strong gray canvas makes white cards pop without borders */
+  --canvas:         #e8e8e8;   /* light gray — like matte print stock */
+  --surface:        #ffffff;   /* pure white — card faces */
+  --subtle:         #f0f0f0;   /* light input background */
 
-  /* Borders */
-  --border:         #e5e7eb;   /* default border    — gray-200 */
+  /* Borders — high contrast, used deliberately on controls not cards */
+  --border:         #0a0a0a;   /* near-black — structural rules and control outlines */
 
-  /* Text — two usable levels + a placeholder-only token */
-  --ink:            #111827;   /* strong foreground — gray-900 — 16.7:1 on white   */
-  --ink-2:          #4b5563;   /* normal foreground — gray-600 —  6.6:1 on white ✓ */
-  --ink-3:          #9ca3af;   /* CSS placeholder ONLY — gray-400 — exempt from contrast rules */
+  /* Text */
+  --ink:            #0a0a0a;
+  --ink-2:          #4a4a4a;
+  --ink-3:          #9a9a9a;   /* placeholder only */
 
-  /* Brand (swap these 3 hex values to rebrand) */
-  --brand:          #3b82f6;   /* blue-500 */
-  --brand-subtle:   #eff6ff;   /* blue-50  */
-  --brand-on:       #1d4ed8;   /* blue-700 */
+  /* Brand — process cyan */
+  --brand:          #00b4d8;
+  --brand-subtle:   #e0f7fa;
+  --brand-on:       #005f6b;
 
-  /* Status */
-  --success:        #059669;   /* emerald-600 */
-  --success-subtle: #ecfdf5;   /* emerald-50  */
-  --warn:           #d97706;   /* amber-600   */
-  --warn-subtle:    #fffbeb;   /* amber-50    */
-  --danger:         #e11d48;   /* rose-600    */
+  /* Status — acid */
+  --success:        #00c853;   /* acid green  */
+  --success-subtle: #e8f5e9;
+  --warn:           #d4900a;   /* vivid amber */
+  --warn-subtle:    #fff8e1;
+  --danger:         #ff1744;   /* acid red    */
 
-  /* Typography — swap to experiment with fonts */
-  --font-ui: system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  /* Typography */
+  --font-ui: 'Space Grotesk', system-ui, -apple-system, sans-serif;
 
   color-scheme: light;
 }
 
 /* ── Dark mode (.dark class on <html>) ───────────────────────────────────── */
 .dark {
-  --canvas:         #030712;   /* gray-950 */
-  --surface:        #111827;   /* gray-900 */
-  --subtle:         #1f2937;   /* gray-800 */
+  --canvas:         #0a0a0a;   /* printer black */
+  --surface:        #2a2a2a;   /* dark card — clear lift from canvas */
+  --subtle:         #383838;   /* input background */
 
-  --border:         #374151;   /* gray-700 */
+  --border:         #dedede;   /* near-white — high contrast rules */
 
-  --ink:            #f9fafb;   /* strong foreground — gray-50  */
-  --ink-2:          #d1d5db;   /* normal foreground — gray-300 — high contrast on dark surfaces */
-  --ink-3:          #6b7280;   /* CSS placeholder ONLY — gray-500 */
+  --ink:            #f5f5f5;
+  --ink-2:          #aaaaaa;
+  --ink-3:          #555555;   /* placeholder only */
 
-  /* Brand in dark mode — slightly lighter for readability */
-  --brand:          #60a5fa;   /* blue-400 */
-  --brand-subtle:   #172554;   /* blue-950 */
-  --brand-on:       #93c5fd;   /* blue-300 */
+  /* Brand — bright process cyan */
+  --brand:          #00d0f0;
+  --brand-subtle:   #001f26;
+  --brand-on:       #00d0f0;
 
-  --success:        #34d399;   /* emerald-400 */
-  --success-subtle: #022c22;   /* custom dark emerald */
-  --warn:           #fbbf24;   /* amber-400 */
-  --warn-subtle:    #311605;   /* custom dark amber */
-  --danger:         #fb7185;   /* rose-400 */
+  /* Status — neon in dark */
+  --success:        #00ff7f;   /* neon spring green */
+  --success-subtle: #00120a;
+  --warn:           #ffd600;   /* acid yellow       */
+  --warn-subtle:    #1a1400;
+  --danger:         #ff1744;   /* acid red          */
 
   color-scheme: dark;
 }
@@ -122,7 +124,7 @@
   /* Section headings — shared by ProfileEditor, PlanEditor, etc.
      Change once here to restyle all section H2s. */
   .section-heading {
-    @apply text-base font-semibold text-ink;
+    @apply text-sm font-bold text-ink uppercase tracking-[0.15em];
   }
 }
 

@@ -21,7 +21,7 @@ export function PhaseCard({ phase, index }: PhaseCardProps) {
   const safePoolTarget = phase.annualSpending * phase.safeYears
 
   return (
-    <div className="bg-surface rounded-xl border border-border p-4 space-y-3">
+    <div className="bg-surface rounded-2xl p-4 space-y-3">
       {/* Name + delete */}
       <div className="flex items-center gap-2">
         <div className="w-2.5 h-2.5 rounded-full shrink-0" style={{ backgroundColor: color }} />
@@ -78,7 +78,7 @@ export function PhaseCard({ phase, index }: PhaseCardProps) {
       {/* Divider */}
       <div className="flex items-center gap-2">
         <span className="text-[10px] text-ink-2 uppercase tracking-wider whitespace-nowrap">Portfolio returns</span>
-        <div className="flex-1 border-t border-border" />
+        <div className="flex-1 border-t border-dashed border-border" />
       </div>
 
       {/* Row 2: portfolio allocation */}

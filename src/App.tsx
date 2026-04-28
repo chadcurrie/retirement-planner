@@ -45,7 +45,7 @@ function App() {
 
       {/* Header */}
       <header className="shrink-0 bg-surface border-b border-border px-4 py-2.5 flex items-center justify-between">
-        <h1 className="text-sm font-semibold text-ink tracking-tight">Retirement Planner</h1>
+        <h1 className="text-xs font-bold text-ink uppercase tracking-[0.15em]">Retirement Planner</h1>
         <div className="flex items-center gap-2">
           {/* Dark mode toggle */}
           <button

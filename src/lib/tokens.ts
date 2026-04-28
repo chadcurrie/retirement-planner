@@ -9,39 +9,38 @@
 */
 
 export const chartColors = {
-  nestEgg:       '#0f172a',   // slate-900 — neutral line, no semantic meaning
-  brand:         '#3b82f6',   // --brand (kept for UI accents)
-  grid:          '#f1f5f9',   // lighter than --subtle, very soft gridlines
-  axis:          '#4b5563',   // --ink-2
-  cursor:        '#e2e8f0',   // between --border and --subtle
-  referenceLine: '#cbd5e1',   // muted slate
-  depletionLine: '#d97706',   // --warn
-  success:       '#059669',   // --success  ← event positive
-  warn:          '#d97706',   // --warn
-  danger:        '#e11d48',   // --danger   ← event negative
+  nestEgg:       '#000000',   // pure black — maximum contrast on white surface
+  brand:         '#00b4d8',   // --brand: process cyan
+  grid:          '#b8b8b8',   // visible mid-gray gridlines
+  axis:          '#4a4a4a',   // --ink-2
+  cursor:        '#888888',   // neutral hover line
+  referenceLine: '#888888',   // muted rule
+  depletionLine: '#e0003c',   // --danger: process red
+  success:       '#00c853',   // acid green
+  warn:          '#d4900a',   // --warn
+  danger:        '#ff1744',   // acid red
 } as const
 
 export const darkChartColors = {
-  nestEgg:       '#f1f5f9',   // slate-100 — light line on dark bg
-  brand:         '#60a5fa',   // --brand (dark)
-  grid:          '#1f2937',   // --subtle (dark)
-  axis:          '#d1d5db',   // --ink-2 (dark)
-  cursor:        '#374151',   // --border (dark)
-  referenceLine: '#374151',   // --border (dark)
-  depletionLine: '#fbbf24',   // --warn (dark)
-  success:       '#34d399',   // --success (dark)
-  warn:          '#fbbf24',   // --warn (dark)
-  danger:        '#fb7185',   // --danger (dark)
+  nestEgg:       '#ffffff',   // pure white — maximum contrast on dark surface
+  brand:         '#00d0f0',   // --brand (dark): bright cyan
+  grid:          '#2e2e2e',   // subtle dark gridlines
+  axis:          '#aaaaaa',   // --ink-2 (dark)
+  cursor:        '#3a3a3a',   // neutral hover line
+  referenceLine: '#3a3a3a',   // muted rule
+  depletionLine: '#ff1744',   // acid red
+  success:       '#00ff7f',   // neon spring green
+  warn:          '#ffd600',   // acid yellow
+  danger:        '#ff1744',   // acid red
 } as const
 
-// Per-phase color palette — wraps at 6.
-// Avoids green/red (event semantics) and amber (warn/depletion).
-// Blue is fine here — the nest egg line is now neutral, not blue.
+// Per-phase color palette — CMYK acidic. Wraps at 6.
+// Used as decorative swatches (timeline bars, dots) — not as text colors.
 export const PHASE_COLORS = [
-  '#3b82f6', // blue-500
-  '#8b5cf6', // violet-500
-  '#f97316', // orange-500
-  '#ec4899', // pink-500
-  '#06b6d4', // cyan-500
-  '#6366f1', // indigo-500
+  '#00b4d8', // process cyan
+  '#d500f9', // electric magenta-violet
+  '#ffb300', // vivid amber
+  '#00c853', // acid green
+  '#ff6d00', // vivid orange
+  '#6200ea', // electric violet
 ] as const

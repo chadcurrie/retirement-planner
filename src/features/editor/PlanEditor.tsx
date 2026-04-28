@@ -51,7 +51,7 @@ export function PlanEditor() {
           <h2 className="section-heading">Phases</h2>
           <span className="text-xs text-ink-2">{phases.length} phase{phases.length !== 1 ? 's' : ''}</span>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-5">
           {phases.map((phase, i) => (
             <PhaseCard key={phase.id} phase={phase} index={i} />
           ))}
@@ -69,7 +69,7 @@ export function PlanEditor() {
           <h2 className="section-heading">Events</h2>
           <span className="text-xs text-ink-2">{events.length} event{events.length !== 1 ? 's' : ''}</span>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-5">
           {events.map((event) => (
             <EventCard key={event.id} event={event} />
           ))}
